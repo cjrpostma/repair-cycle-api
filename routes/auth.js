@@ -36,4 +36,36 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// POST => /auth/login
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // check if user exists
+    const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
+      email,
+    ]);
+
+    if (user.rows.length === 0) {
+      return res.status(401).json('Email or password is invalid.');
+    }
+    // check if incoming password matches password in db
+    const isValidPassword = await bcrypt.compare(
+      password,
+      user.rows[0].user_password
+    );
+
+    if (!isValidPassword) {
+      return res.status(401).json('Email or password is invalid.');
+    }
+
+    // return jwt token
+    const token = jwtGenerator(user.rows[0].user_id);
+    res.json({ token });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error.');
+  }
+});
+
 module.exports = router;
