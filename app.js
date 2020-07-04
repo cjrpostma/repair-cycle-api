@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.use('/', require('./routes/auth'));
+app.use('/auth', require('./routes/auth'));
 
 app.listen(5000, () => {
   console.log('Listening on port 5000');
