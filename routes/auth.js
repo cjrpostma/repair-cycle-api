@@ -2,9 +2,10 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../utils/jwtGenerator');
 const pool = require('../db');
+const validators = require('../middleware/validators');
 
 // POST => /auth/register
-router.post('/register', async (req, res) => {
+router.post('/register', validators, async (req, res) => {
   try {
     const { email, name, password } = req.body;
 
@@ -14,7 +15,7 @@ router.post('/register', async (req, res) => {
     ]);
 
     if (user.rows.length !== 0) {
-      return res.status(401).send('User already exists.');
+      return res.status(401).json({ message: 'User already exists.' });
     }
     // Bcrypt user password
     const saltRounds = 10;
@@ -37,7 +38,7 @@ router.post('/register', async (req, res) => {
 });
 
 // POST => /auth/login
-router.post('/login', async (req, res) => {
+router.post('/login', validators, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
     ]);
 
     if (user.rows.length === 0) {
-      return res.status(401).json('Email or password is invalid.');
+      return res.status(401).json({ message: 'Email or password is invalid.' });
     }
     // check if incoming password matches password in db
     const isValidPassword = await bcrypt.compare(
@@ -56,7 +57,7 @@ router.post('/login', async (req, res) => {
     );
 
     if (!isValidPassword) {
-      return res.status(401).json('Email or password is invalid.');
+      return res.status(401).json({ message: 'Email or password is invalid.' });
     }
 
     // return jwt token
