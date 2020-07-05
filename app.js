@@ -9,6 +9,7 @@ app.use(cors());
 
 // routes
 app.use('/auth', require('./routes/auth'));
+app.use('/dashboard', require('./routes/dashboard'));
 
 app.listen(5000, () => {
   console.log('Listening on port 5000');
