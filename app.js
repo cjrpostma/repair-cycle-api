@@ -5,10 +5,11 @@ const app = express();
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // routes
-app.use('/api/v0/auth', require('./routes/auth'));
+app.use('/api/v0/user', require('./routes/user'));
 app.use('/api/v0/dashboard', require('./routes/dashboard'));
 
 app.listen(5000, () => {

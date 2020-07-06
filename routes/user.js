@@ -9,14 +9,14 @@ router.post(
     check('name').not().isEmpty().trim().escape(),
     check('password').isLength({ min: 6 }),
   ],
-  require('../controllers/auth').registerUser
+  require('../controllers/user').registerUser
 );
 
 // POST => /api/v0/auth/login
 router.post(
   '/login',
   [check('email').isEmail().normalizeEmail()],
-  require('../controllers/auth').loginUser
+  require('../controllers/user').loginUser
 );
 
 module.exports = router;
