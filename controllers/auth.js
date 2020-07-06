@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
-const jwtGenerator = require('../utils/jwtGenerator');
+const generateJwt = require('../utils/generateJwt');
 const pool = require('../db');
 
 exports.registerUser = async (req, res) => {
@@ -36,7 +36,8 @@ exports.registerUser = async (req, res) => {
     );
 
     // generate jwt token
-    const token = jwtGenerator(newUser.rows[0].user_id);
+    const { user_email, user_id, user_name } = newUser.rows[0];
+    const token = generateJwt(user_email, user_id, user_name);
     res.json({ token });
   } catch (error) {
     console.error(error.message);
@@ -76,7 +77,7 @@ exports.loginUser = async (req, res) => {
     }
 
     // return jwt token
-    const token = jwtGenerator(user.rows[0].user_id);
+    const token = generateJwt(user.rows[0].user_id);
     res.json({ token });
   } catch (error) {
     console.error(error.message);

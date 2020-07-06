@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
-const authorization = require('../middleware/authorization');
 
 // POST => /api/v0/auth/register
 router.post(
@@ -19,15 +18,5 @@ router.post(
   [check('email').isEmail().normalizeEmail()],
   require('../controllers/auth').loginUser
 );
-
-// GET => /auth/private
-router.get('/private', authorization, async (req, res) => {
-  try {
-    res.json(true);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error.');
-  }
-});
 
 module.exports = router;

@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const pool = require('../db');
-const authorization = require('../middleware/authorization');
+const verifyJwt = require('../middleware/verifyJwt');
 
-router.get('/', authorization, async (req, res) => {
+router.get('/', verifyJwt, async (req, res) => {
   try {
     const user = await pool.query(
-      'SELECT user_name FROM users WHERE user_id = $1',
-      [req.user]
+      'SELECT user_email, user_id, user_name FROM users WHERE user_id = $1',
+      [req.user.id]
     );
 
     res.json(user.rows[0]);
