@@ -1,5 +1,8 @@
-const router = require('express').Router();
-const { check } = require('express-validator');
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { loginUser, registerUser } from '../controllers/users';
+
+const router = Router();
 
 // Register new user
 // POST /api/v0/auth/register
@@ -10,15 +13,11 @@ router.post(
     check('name').not().isEmpty().trim().escape(),
     check('password').isLength({ min: 6 }),
   ],
-  require('../controllers/user').registerUser
+  registerUser
 );
 
 // Log in current user
 // POST /api/v0/auth/login
-router.post(
-  '/login',
-  [check('email').isEmail().normalizeEmail()],
-  require('../controllers/user').loginUser
-);
+router.post('/login', [check('email').isEmail().normalizeEmail()], loginUser);
 
-module.exports = router;
+export default router;
