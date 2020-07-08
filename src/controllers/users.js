@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import generateJwt from '../utils/generateJwt';
 import pool from '../db';
 
-exports.registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -46,7 +46,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-exports.loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -64,22 +64,21 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Email or password is invalid.' });
     }
 
-    const isValidPassword = await bcrypt.compare(
-      password,
-      user.rows[0].user_password
-    );
+    const { user_email, user_id, user_name, user_password } = user.rows[0];
+
+    const isValidPassword = await bcrypt.compare(password, user_password);
 
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Email or password is invalid.' });
     }
 
-    const token = generateJwt(user.rows[0].user_id);
+    const token = generateJwt(user_id);
 
     res.json({
-      email: user.user_email,
-      name: user.user_name,
+      email: user_email,
+      name: user_name,
       token,
-      userId: user.user_id,
+      userId: user_id,
     });
   } catch (error) {
     console.error(error.message);
