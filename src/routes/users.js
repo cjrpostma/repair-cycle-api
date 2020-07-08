@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { check } = require('express-validator');
 
-// POST => /api/v0/auth/register
+// Register new user
+// POST /api/v0/auth/register
 router.post(
   '/register',
   [
@@ -12,7 +13,8 @@ router.post(
   require('../controllers/user').registerUser
 );
 
-// POST => /api/v0/auth/login
+// Log in current user
+// POST /api/v0/auth/login
 router.post(
   '/login',
   [check('email').isEmail().normalizeEmail()],

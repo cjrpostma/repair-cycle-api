@@ -1,7 +1,7 @@
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcrypt');
-const generateJwt = require('../utils/generateJwt');
-const pool = require('../db');
+import { validationResult } from 'express-validator';
+import bcrypt from 'bcrypt';
+import generateJwt from '../utils/generateJwt';
+import pool from '../db';
 
 exports.registerUser = async (req, res) => {
   const errors = validationResult(req);

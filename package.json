@@ -4,18 +4,46 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "prestart": "babel ./src --out-dir build",
+    "start": "node ./build/bin/www",
+    "startdev": "nodemon --exec babel-node ./src/bin/www",
+    "lint": "./node_modules/.bin/eslint ./src",
+    "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
+    "postpretty": "yarn lint --fix",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register"
   },
   "author": "Chris Postma",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "@babel/runtime": "^7.10.4",
     "bcrypt": "^5.0.0",
+    "chai": "^4.2.0",
+    "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "coveralls": "^3.1.0",
+    "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.2.1"
+    "mocha": "^8.0.1",
+    "morgan": "~1.9.1",
+    "nyc": "^15.1.0",
+    "pg": "^8.2.1",
+    "prettier": "^2.0.5",
+    "sinon-chai": "^3.5.0",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
