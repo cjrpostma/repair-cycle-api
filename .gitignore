@@ -12,6 +12,7 @@
 
 # production
 /build
+/coverage
 
 # misc
 .DS_Store
@@ -20,6 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.nyc_output/
 
 # local env files
 .env
