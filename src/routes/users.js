@@ -5,7 +5,7 @@ import { loginUser, registerUser } from '../controllers/users';
 const router = Router();
 
 // Register new user
-// POST /api/v0/auth/register
+// POST /api/v1/users/register
 router.post(
   '/register',
   [
@@ -17,7 +17,7 @@ router.post(
 );
 
 // Log in current user
-// POST /api/v0/auth/login
+// POST /api/v1/users/login
 router.post('/login', [check('email').isEmail().normalizeEmail()], loginUser);
 
 export default router;
