@@ -32,7 +32,7 @@ export const registerUser = async (req, res) => {
 
     const { user_email, user_id, user_name } = newUser.rows[0];
     const token = generateJwt(user_email, user_id, user_name);
-    res.json({
+    res.status(201).json({
       email,
       name,
       token,
@@ -74,7 +74,7 @@ export const loginUser = async (req, res) => {
 
     const token = generateJwt(user_id);
 
-    res.json({
+    res.status(200).json({
       email: user_email,
       name: user_name,
       token,
