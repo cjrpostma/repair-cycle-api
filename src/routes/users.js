@@ -1,8 +1,13 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { loginUser, registerUser } from '../controllers/users';
+import verifyJwt from '../middleware/verifyJwt';
+import { getUsers, loginUser, registerUser } from '../controllers/users';
 
 const router = Router();
+
+// Get all users
+// GET /api/v1/users
+router.get('/', verifyJwt, getUsers);
 
 // Register new user
 // POST /api/v1/users/register

@@ -3,6 +3,20 @@ import bcrypt from 'bcrypt';
 import generateJwt from '../utils/generateJwt';
 import pool from '../db';
 
+export const getUsers = async (req, res) => {
+  try {
+    const users = await pool.query(
+      'SELECT user_email, user_id, user_name FROM users'
+    );
+    res.json({ users: users.rows });
+  } catch (error) {
+    console.error(error.message);
+    res
+      .status(500)
+      .send('Server error. Unable to fetch users. Please try again later.');
+  }
+};
+
 export const registerUser = async (req, res) => {
   const errors = validationResult(req);
 
