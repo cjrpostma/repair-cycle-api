@@ -16,6 +16,9 @@ Learning goals:
 - [x] Creating a database connection pool that functions in dev and prod environments
 - [x] Practice organizing a RESTful API directory structure in various ways
 - [x] Utilize various middle to rate limit, handle CORS, etc.
+- [x] Practice setting variables for multiple environments
+- [x] Deploy to Heroku and utilize Heroku Postgres addon
+- [x] Practice implementing a CI pipeline via Travis CI with automated deployment to Heroku and test coverage reporting via Coveralls
 
 ### 2. Technology
 
@@ -29,12 +32,10 @@ Learning goals:
 
 https://repair-cycle-api.herokuapp.com/api/v1
 
-Routes:
+###### Register a new user
+POST `/users/register`
 
-- Register a new user
-POST `/api/v1/users/register`
-
-Provide the following JSON:
+Provide the following JSON in the request body:
 ```javascript
 {
   "name": "<Your name>",
@@ -43,10 +44,10 @@ Provide the following JSON:
 }
 ```
 
-- Log in as a user (email, password)
-POST `/api/v1/users/login`
+###### Log in as a user (email, password)
+POST `/users/login`
 
-Provide the following JSON:
+Provide the following JSON in the request body:
 ```javascript
 {
   "email": "<Email you registered with>",
@@ -54,7 +55,11 @@ Provide the following JSON:
 }
 ```
 
-- Get all users
-GET `/api/v1/users`
+###### Get all users (protected route)
+GET `/users`
 
-Requires header `Authorization: Bearer <Your JWT>`
+Provide the following HTTP Header:
+`Authorization: Bearer <Your JWT>`
+
+
+
