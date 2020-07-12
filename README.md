@@ -32,7 +32,7 @@ Learning goals:
 
 https://repair-cycle-api.herokuapp.com/api/v1
 
-###### Register a new user
+##### Register a new user
 POST `/users/register`
 
 Provide the following JSON in the request body:
@@ -44,22 +44,21 @@ Provide the following JSON in the request body:
 }
 ```
 
-###### Log in as a user (email, password)
+##### Log in as a user
 POST `/users/login`
 
 Provide the following JSON in the request body:
 ```javascript
 {
-  "email": "<Email you registered with>",
-  "password": "<Password you registered with>",
+  "email": "<Email registered with>",
+  "password": "<Password registered with>",
 }
 ```
 
-###### Get all users (protected route)
+##### Get all users (protected route)
 GET `/users`
 
 Provide the following HTTP Header:
-`Authorization: Bearer <Your JWT>`
-
-
-
+```javascript
+Authorization: Bearer <Your JWT>
+```
