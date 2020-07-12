@@ -60,5 +60,5 @@ GET `/users`
 
 Provide the following HTTP Header:
 ```javascript
-Authorization: Bearer <Your JWT>
+'Authorization': 'Bearer <Your JWT>'
 ```
