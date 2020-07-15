@@ -15,7 +15,7 @@ Learning goals:
 - [x] Hashing passwords prior to storage
 - [x] Creating a database connection pool that functions in dev and prod environments
 - [x] Practice organizing a RESTful API directory structure in various ways
-- [x] Utilize various middle to rate limit, handle CORS, etc.
+- [x] Utilize various middleware to rate limit, handle CORS, etc.
 - [x] Practice setting variables for multiple environments
 - [x] Deploy to Heroku and utilize Heroku Postgres addon
 - [x] Practice implementing a CI pipeline via Travis CI with automated deployment to Heroku and test coverage reporting via Coveralls
