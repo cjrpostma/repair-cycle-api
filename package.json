@@ -43,7 +43,7 @@
     "express-validator": "^6.6.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "morgan": "~1.9.1",
     "nyc": "^15.1.0",
     "pg": "^8.2.1",
